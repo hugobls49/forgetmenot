@@ -20,7 +20,7 @@ jobs:
 
       - name: Start services
         run: |
-          docker-compose up -d
+          docker compose up -d
 
       - name: Wait for services to be ready
         run: |
@@ -28,7 +28,7 @@ jobs:
           sleep 30
           
           # Vérifier que les services sont en cours d'exécution
-          docker-compose ps
+          docker compose ps
 
       - name: Check backend health
         run: |
@@ -42,14 +42,14 @@ jobs:
 
       - name: Run database migrations
         run: |
-          docker-compose exec -T backend npx prisma migrate deploy || true
+          docker compose exec -T backend npx prisma migrate deploy || true
 
       - name: Check database connection
         run: |
-          docker-compose exec -T postgres psql -U forgetmenot -d forgetmenot -c "SELECT 1;" || exit 1
+          docker compose exec -T postgres psql -U forgetmenot -d forgetmenot -c "SELECT 1;" || exit 1
 
       - name: Stop services
         if: always()
         run: |
-          docker-compose down -v
+          docker compose down -v
 

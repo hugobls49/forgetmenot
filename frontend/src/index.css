@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: #2D2D2D;
+  background-color: #FFE9D0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #FFE9D0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-taupe hover:opacity-90 text-darkgray font-medium py-3 px-6 rounded-full transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-lightgray hover:opacity-90 text-darkgray font-medium py-3 px-6 rounded-full transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply border-2 border-taupe text-darkgray hover:bg-taupe font-medium py-2 px-4 rounded-full transition-colors duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-taupe border-none text-darkgray placeholder-mediumgray rounded-full focus:outline-none focus:ring-2 focus:ring-darkgray transition-all duration-200;
+  }
+
+  .select-field {
+    @apply px-6 py-3 bg-taupe border-none text-darkgray rounded-full focus:outline-none focus:ring-2 focus:ring-darkgray appearance-none cursor-pointer transition-all duration-200;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%232D2D2D' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-position: right 1rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  .card {
+    @apply bg-cream border border-taupe p-6 rounded-2xl transition-colors duration-200;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8;
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold text-darkgray mb-4;
+  }
+}
+
+/* Animations personnalisées */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #D9D9D9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8A8A8A;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4A4A4A;
+}
+

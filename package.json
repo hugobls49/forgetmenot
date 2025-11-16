@@ -1,0 +1,26 @@
+{
+  "name": "forgetmenot",
+  "version": "1.0.0",
+  "description": "Application de mémorisation par répétition espacée",
+  "private": true,
+  "workspaces": [
+    "apps/frontend",
+    "apps/backend"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace=apps/frontend",
+    "dev:backend": "npm run start:dev --workspace=apps/backend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:frontend": "npm run build --workspace=apps/frontend",
+    "build:backend": "npm run build --workspace=apps/backend",
+    "build": "npm run build:backend && npm run build:frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
+
