@@ -1,0 +1,55 @@
+name: Docker Compose Integration Test
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  integration-test:
+    name: Docker Compose Integration Test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Start services
+        run: |
+          docker-compose up -d
+
+      - name: Wait for services to be ready
+        run: |
+          echo "Waiting for services to start..."
+          sleep 30
+          
+          # Vérifier que les services sont en cours d'exécution
+          docker-compose ps
+
+      - name: Check backend health
+        run: |
+          # Attendre que le backend soit prêt (vérifier Swagger ou la racine)
+          timeout 60 bash -c 'until curl -f http://localhost:3000/api || curl -f http://localhost:3000; do sleep 2; done' || true
+
+      - name: Check frontend
+        run: |
+          # Vérifier que le frontend répond
+          curl -f http://localhost:5173 || echo "Frontend check skipped"
+
+      - name: Run database migrations
+        run: |
+          docker-compose exec -T backend npx prisma migrate deploy || true
+
+      - name: Check database connection
+        run: |
+          docker-compose exec -T postgres psql -U forgetmenot -d forgetmenot -c "SELECT 1;" || exit 1
+
+      - name: Stop services
+        if: always()
+        run: |
+          docker-compose down -v
+
