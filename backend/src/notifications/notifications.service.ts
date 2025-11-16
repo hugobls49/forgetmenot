@@ -163,7 +163,7 @@ export class NotificationsService {
       for (const user of users) {
         // Vérifier l'heure de rappel préférée
         const reminderTime = user.settings?.dailyReminderTime || '09:00';
-        const [hour, minute] = reminderTime.split(':').map(Number);
+        const [hour] = reminderTime.split(':').map(Number);
         const now = new Date();
 
         // Envoyer uniquement si c'est l'heure du rappel (avec une marge de 1 heure)
