@@ -31,6 +31,7 @@ export default function NotesPage() {
 
   useEffect(() => {
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterCategory]);
 
   const loadData = async () => {

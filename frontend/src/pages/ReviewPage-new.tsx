@@ -52,19 +52,6 @@ export default function ReviewPage() {
     }
   };
 
-  const formatNextDate = (date: string) => {
-    const now = new Date();
-    const nextDate = new Date(date);
-    const diffTime = nextDate.getTime() - now.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    if (diffDays === 0) return "aujourd'hui";
-    if (diffDays === 1) return "demain";
-    if (diffDays < 7) return `dans ${diffDays} jours`;
-    if (diffDays < 30) return `dans ${Math.floor(diffDays / 7)} semaines`;
-    return `dans ${Math.floor(diffDays / 30)} mois`;
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">

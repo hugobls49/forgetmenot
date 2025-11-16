@@ -36,6 +36,7 @@ export default function RegisterPage() {
   const onSubmit = async (data: RegisterFormData) => {
     setIsLoading(true);
     try {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...registerData } = data;
       const response = await authService.register(registerData);
       setAuth(response.user, response.accessToken, response.refreshToken);
